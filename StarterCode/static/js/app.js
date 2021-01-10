@@ -19,7 +19,7 @@ d3.json("../data/samples.json").then((data) => {
 //Create function that uses d3 to read json data and append metadata to panel
 function panelInfo(personID) {
   d3.json("../data/samples.json").then((data) => {
-    //store metadata into variable to filter
+    //store metadata into variable
     var metadata = data.metadata;
     //Filter data by personID
     var filterData = metadata.filter((firstObject) => firstObject.id == personID);
@@ -41,32 +41,43 @@ function panelInfo(personID) {
 //Create function that uses d3 to read json data and append graphs
 function chartInfo(personID) {
   d3.json("../data/samples.json").then((data) => {
+    //store bacteria sample data into variable
     var chartData = data.samples;
+    //filter data by personID
     var filterChart = chartData.filter((firstSample) => firstSample.id == personID);
+    //set result as variable and log in console
     var firstChart = filterChart[0];
     console.log(firstChart);
 
+    //create variables for charts 
     var otu_ids = firstChart.otu_ids;
+    var yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
     var sample_values = firstChart.sample_values;
     var otu_labels = firstChart.otu_labels;
+    
 
+
+    //Trace for bar chart
     var barTrace = {
-      x: sample_values,
-      y: otu_ids,
+      x: sample_values.slice(0, 10).reverse(),
+      y: yticks,
       text: otu_labels,
       type: "bar",
       orientation: "h"
     };
 
+    //Data for bar chart
     var barData = [barTrace];
 
+    //Layout for bar chart
     var barLayout = {
-      title: "Top 10",
+      title: "Top 10 Bacterial Samples",
       xaxis: { title: "Sample Values" },
       yaxis: { title: "OTU ID" }
     };
     
-    Plotly.newPlot("plot", barData, barLayout);
+    //Plot bar chart
+    Plotly.newPlot("bar", barData, barLayout);
 
   });
 };
