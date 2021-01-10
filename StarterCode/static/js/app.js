@@ -79,5 +79,30 @@ function chartInfo(personID) {
     //Plot bar chart
     Plotly.newPlot("bar", barData, barLayout);
 
+    //Create trace for bubble chart
+    var bubbleTrace = {
+      x: otu_ids,
+      y: sample_values,
+      mode: "markers",
+      marker: {
+        size: sample_values,
+        color: otu_ids,
+      }, 
+      text: otu_labels
+    };
+
+    //Data for bubble chart
+    var bubbleData = [bubbleTrace];
+
+    //Layout for bubble chart
+    var bubbleLayout = {
+      title: "Bacteria Cultures Per Sample",
+      hovermode: "closest",
+      xaxis: { title: "OTU ID" },
+    };
+    
+    //Plot bubble chart
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+
   });
 };
