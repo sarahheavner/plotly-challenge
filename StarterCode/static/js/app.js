@@ -10,5 +10,21 @@ d3.json("../data/samples.json").then((data) => {
   d3.select("#selDataset").append("option")
                           .text(person)
                           .property("value", person);
-      });
+    });
   });
+
+
+//Create function that uses d3 to read json data and append metadata to panel
+function panelInfo(personID) {
+  d3.json("../data/samples.json").then((data => {
+      //Use d3 to create reference to panel
+    var infoPanel = d3.select("#sample-metadata");
+      //Use object.entries to select key/value for object
+    Object.entries(data).forEach(([key, value]) => {
+        //Append key/value to panel
+      infoPanel.append("p").text(`${key}:${value}`);
+    });
+  })); 
+};
+
+
