@@ -106,3 +106,11 @@ function chartInfo(personID) {
 
   });
 };
+
+
+// create function that will change panel and charts when dropdown option is changed
+function optionChanged(personID) {
+  // Fetch new data each time a new sample is selected
+  chartInfo(personID);
+  panelInfo(personID);
+  };
