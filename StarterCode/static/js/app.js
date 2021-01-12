@@ -2,10 +2,11 @@ d3.json("../data/samples.json").then(function(data) {
   console.log(data);
 });
 
+function init () {
 // Use d3 to read json data and append names to dropdown menu
-d3.json("../data/samples.json").then((data) => {
-  data.names.forEach((person) => {
-  d3.select("#selDataset").append("option")
+  d3.json("../data/samples.json").then((data) => {
+    data.names.forEach((person) => {
+    d3.select("#selDataset").append("option")
                           .text(person)
                           .property("value", person);
     });
@@ -13,6 +14,7 @@ d3.json("../data/samples.json").then((data) => {
 
   panelInfo("940");
   chartInfo("940");
+}
 
 
 
@@ -114,3 +116,7 @@ function optionChanged(personID) {
   chartInfo(personID);
   panelInfo(personID);
   };
+
+init ();
+
+
